@@ -1,5 +1,3 @@
-Quase sem espaço de armazenamento … Se você atingir o limite, não poderá criar, editar ou fazer upload de arquivos. Compre 30 GB por R$ 4,50 mensais.
-100%
 import pyxel
 class Personagem:
     def __init__(self,x,y,largura,altura,cor,desenho):
@@ -72,7 +70,7 @@ class Personagem:
         YImagem = self.altura * self.linSprites
         if self.desenho == 'meleca':
             pyxel.blt(self.x1, self.y1,             
-                  0,                            
+                  1,                            
                   XImagem,YImagem,                        
                   self.largura, self.altura,    
                   self.cor)   
@@ -87,16 +85,15 @@ class Personagem:
 
 class Jogo:
     def __init__(self):
-        pyxel.init(120,100,"Colisao")
+        pyxel.init(136,100,"Colisao")
         # Atributos aqui
         self.heroi = Personagem(10,10,14,18,7,'meleca')
-        #self.inimigo = Personagem(80,80,16,16,10,'gatinho')
         
         #Carregar imagem
        
-        pyxel.load('meu_arquivo.pyxres')
-        pyxel.images[0].load(0, 0, "personagem_56x72.png")
-               
+        
+        pyxel.load("corredor.pyxres")      
+        pyxel.images[1].load(0, 0, "personagem_56x72.png") 
         pyxel.run(self.update,self.draw)
     
     def mover(self,obj,up,down,left,right):
@@ -114,7 +111,6 @@ class Jogo:
          
     def update(self):
         self.mover(self.heroi  ,pyxel.KEY_W,pyxel.KEY_S,pyxel.KEY_A,pyxel.KEY_D)
-        #self.mover(self.inimigo,pyxel.KEY_W ,pyxel.KEY_S   ,pyxel.KEY_A   ,pyxel.KEY_D)
                   
     def colisao(self,obj1,obj2):
         
@@ -130,7 +126,10 @@ class Jogo:
    
     def draw(self):
         pyxel.cls(0)
-        pyxel.blt(0,0,0,0,0,120,100)
+        pyxel.blt(0,0,0,0,0,136,100)
         self.heroi.draw()
-       # self.inimigo.draw()
+        pyxel.mouse(True)
 Jogo()
+
+
+
