@@ -1,0 +1,127 @@
+SALA:
+
+ -Sofá: Tudo o que ele encontra é poeira e os carrinhos que ele tinha perdido
+
+ -Tapete: Sujeira
+
+ -Quadro: tem a data do dia em que a foto foi tirada.(22/02/2007)
+ 
+ -Globo de Neve: Um velhinho fofo entregando presentes em um dia de neve.
+ 
+ -Cogumelo: ele fica doente.
+ 
+ -Livro Vermelho: Livro com fotos
+ 
+ -Livro Azul: tem um papel com uma dica sobre a senha do cofre
+ 
+ -Livro Verde: É um livro sobre plantas.
+ 
+ -Livro Amarelo: Livros de flores
+ 
+ 
+QUARTO:
+
+  -Travesseiro 1: Bíblia
+  
+  -Travesseiro 2: canivete
+  
+  -Quadro do Anel: Dica(a data de casamento dos pais dele)03/04/1989
+  
+  -Gaveta de Cima: 
+  
+  -Gaveta de Baixo: 
+  
+  -Luz: em baixo da luz tem uma foto de família
+  
+  -Quadro da Flor: nome da planta que tem no corredor
+  
+  -Quadro do Mar: tem uma chave
+  
+  
+CORREDOR:
+
+  -Relógio: ele não sabe ler as horas
+  
+  -Planta: 
+  
+  
+ESCRITÓRIO:
+
+  -Quadro: Lugar onde o cofre está escondido
+  
+  
+  
+---------------------------------------------------------------------------------------
+
+QUAIS SÃO AS DICAS:
+
+1 - Data do casamento dos pais do baby monkey (em algum lugar vai ter a certidão deles)
+2 - 
+3 - 
+4 - 
+
+-------------------------------------------------------------------------------------
+FINAIS
+
+[1]Você encontra todas as dicas e acerta a senha e rasga os documentos:
+
+Sem os documentos, a empresa perdeu o contrato e processou seus pais. A pressão e as dívidas foram grandes demais para a família suportar. A casa precisou ser vendida e a rotina que você conhecia acabou para sempre.
+
+Sentado no quarto da casa da sua avó, você olha para o que sobrou da sua família e percebe tarde demais: no fim, a sua raiva destruiu a vida das únicas pessoas que tentavam sustentar o seu futuro.
+
+[2]Você encontra as dicas mas erra a ordem da senha:
+
+(Você digita o código errado. As luzes vermelhas piscam e um alarme ensurdecedor ecoa pela casa. O sistema de segurança dispara uma mensagem de emergência.)
+Poucos minutos depois, os pais chegam afobados junto com as luzes azuis e vermelhas da polícia. Seu pai arromba a porta, e sua mãe corre desesperada em sua direção, te abraçando com força, achando que a casa tinha sido invadida e pergunta se você está bem.
+Você fica em silêncio, tremendo de culpa. O policial analisa a central de segurança e a câmera do corredor. Ele se aproxima com um olhar sério e diz: -"Senhores... não houve invasão. O alarme foi acionado por dentro. Foi o filho de vocês."
+O abraço da sua mãe se desfaz lentamente. O olhar de pavor dos seus pais dá lugar a um silêncio estarrecedor. Por conta dos danos ao sistema de segurança e do arrombamento do cofre com intenção de roubo/vandalismo, as autoridades precisam intervir.
+
+Enquanto a viatura se afasta levando você para o centro de reeducação infantil, você vê seus pais chorando no portão. Eles não estavam bravos — estavam de coração partido por entenderem que você preferiu destruí-los a conversar.
+
+[3] Você encontra todas as dicas consegue abrir o cofre mas decide não rasgar os documentos:
+
+Seus pais chegam em casa,eles trouxeram seu bolo favorito,você pede desculpas por ter brigado com eles e eles também pedem desculpas por terem deixado ele de lado por causa do trabalho.
+Eles conseguem entregar os documentos importantes e recebem uma promoção no trabalho e dedicam mais tempo para brincar com você.
+
+mensagem final no final [3]:
+
+"Nem todos os sentimentos são ditos em palavras. Às vezes, o amor está escondido no cansaço do dia a dia, nos cuidados silenciosos e naquilo que os adultos fazem para proteger quem amam.
+
+Você abriu o cofre, mas decidiu não fechar o coração. A raiva passou e a sua família continua aqui."
+
+[4] Se o jogador clicar no cogumelo enquanto procura dicas o personagem morre
+
+
+Olá!!!!
+
+quando eu estava tentando fazer as colisões dos objetos o boneco começou a se mover mais rápido e as colisões não funcionaram
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

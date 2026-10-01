@@ -13,13 +13,13 @@ class Personagem:
         self.definirBox()
         self.desenho = desenho
         
-#'--------------------------------------------------------------------------'#    
+#_________________________________________________________________________#     
         
     def definirBox(self):
         self.x2 = self.x1 + abs(self.largura)
         self.y2 = self.y1 + abs(self.altura)
         
-#'---------------------------------------------------------------------------'#        
+#_________________________________________________________________________#          
     
     def mover(self,dx,dy):
     
@@ -67,7 +67,7 @@ class Personagem:
             self.y1 = self.y1 + dy
             self.definirBox()
   
-#'------------------------------------------------------------------------'#  
+#_________________________________________________________________________#   
   
     def draw(self):
     
@@ -86,7 +86,7 @@ class Personagem:
                   self.largura, self.altura,    
                   self.cor)   
             
-#------------------------------------------------------------------#                  
+#_________________________________________________________________________#                   
 
 class Jogo:
     def __init__(self):
@@ -95,10 +95,14 @@ class Jogo:
         # Coisas
         self.heroi = Personagem(90,65,14,18,7,'meleca')
         self.dica1 = False
-        self.dica2 = False
-        self.dica3 = False
-        self.dica4 = False
         self.sala_atual = 3
+        self.livro_vermelho = False
+        self.livro_verde = False
+        self.livro_amarelo = False
+        self.sofa = False
+        self.subir = False
+        self.descer = False
+        self.cogumelo = False
         
         self.portas = [
     # P1: Quarto
@@ -106,7 +110,9 @@ class Jogo:
     # P2: Escritório
     {"x1": 75, "x2": 100, "destino": 2, "arquivo": "escritorio.pyxres", "heroi_x": 90, "heroi_y": 65},
     # P3: Sala
-    {"x1": 79, 'x2': 112,'destino': 3, 'arquivo': 'sala.pyxres', 'heroi_x':  90, "heroi_y": 65}
+    {"x1": 79, 'x2': 112,'destino': 3, 'arquivo': 'sala.pyxres', 'heroi_x':  90,
+ "heroi_y": 65}
+    #
 ]
         
         #Carregar imagem
@@ -115,7 +121,7 @@ class Jogo:
         pyxel.images[1].load(0, 0, "personagem_56x72.png") 
         pyxel.run(self.update,self.draw)
     
-#'------------------------------------------------------------------'#    
+#_________________________________________________________________________#      
     
     def mover(self,obj,up,down,left,right):
         dx=0
@@ -128,19 +134,42 @@ class Jogo:
             dx = -1
         if pyxel.btn(right):
             dx = +1
-        obj.mover(dx,dy)
-
-#'-------------------------------------------------------------------------'#
+        
+        nx = obj.x1 + dx
+        ny = obj.y1 + dy
+        
+        if self.posicao_valida(nx, ny):
+            obj.mover(dx, dy)
+        
+#_________________________________________________________________________#  
 
     def update(self):
     
         self.mover(self.heroi  ,pyxel.KEY_W,pyxel.KEY_S,pyxel.KEY_A,pyxel.KEY_D)
         
+        #Interação com os Objetos
         if pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
         
             if pyxel.mouse_x == 44 and (pyxel.mouse_y >= 10 and pyxel.mouse_y <= 22):
             
                 self.dica1 = True
+                
+            if pyxel.mouse_x == 41 and (pyxel.mouse_y >= 9 and pyxel.mouse_y <= 22):
+                
+                    self.livro_vermelho = True
+             
+            if pyxel.mouse_x == 46 and (pyxel.mouse_y >= 11 and pyxel.mouse_y <= 22):
+                
+                    self.livro_verde = True 
+                    
+            if pyxel.mouse_x == 48 and (pyxel.mouse_y >= 12 and pyxel.mouse_y <= 22):
+                
+                    self.livro_amarelo = True 
+                    
+            if self.sala_atual == 3 and pyxel.mouse_x == 35 and (pyxel.mouse_y >= 8 and pyxel.mouse_y <= 13):
+                
+                    self.cogumelo = True 
+                
                 
         #Limites de Tela
         
@@ -149,12 +178,19 @@ class Jogo:
             
         if self.heroi.x2 > 136:
             self.heroi.x1 = 136 - self.heroi.largura
+        
+        
+        if self.sala_atual in [1 , 2, 3]:
+            tamanho_dos_pisos = 48
+        else:
+            tamanho_dos_pisos = 58
             
-        if self.heroi.y1 <58:
-            self.heroi.y1 = 58
+        if self.heroi.y1 < tamanho_dos_pisos:
+            self.heroi.y1 = tamanho_dos_pisos
         
         if self.heroi.y2 > 100:
             self.heroi.y1 = 100 - self.heroi.altura
+            
             
         #Troca de sala ADC
         
@@ -192,7 +228,9 @@ class Jogo:
                 pode_sair = True
 
             if pode_sair and pyxel.btnp(pyxel.KEY_E):
-                self.sala_atual = 0 
+            
+                pode_sair = False
+                self.sala_atual = 0
                 self.carregar_cenario('corredor.pyxres')
 
                 if origem == 1:       
@@ -207,7 +245,7 @@ class Jogo:
         
         self.heroi.definirBox()
         
-#'----------------------------------------------------------------------------'#        
+#_________________________________________________________________________#          
                   
     def colisao(self,obj1,obj2):
         
@@ -218,7 +256,7 @@ class Jogo:
         else:
             return False
             
-#'------------------------------------------------------------------------'#            
+#_________________________________________________________________________#              
             
     def draw(self):
         pyxel.cls(0)
@@ -232,7 +270,7 @@ class Jogo:
             for porta in self.portas:
                 if porta['x1'] <= self.heroi.x2 and self.heroi.x1 <= porta['x2']:
 
-                    if porta['destino'] in [1]  and self.heroi.y1 <= 60:
+                    if porta['destino'] == 1  and self.heroi.y1 <= 60:
                         pyxel.text(porta['x1'] - 7, 19, '[E] Entrar', 7)
                     elif porta['destino'] == 2  and self.heroi.y1 <= 60:
                         pyxel.text(porta['x1'] + 2 , 19, '[E] Entrar', 7)    
@@ -246,27 +284,136 @@ class Jogo:
                 pyxel.text(103, 10, '[E] Sair', 1)
             elif origem == 2 and 10 <= self.heroi.x1 <= 50 and self.heroi.y1 <= 75:
                 pyxel.text(16, 18, '[E] Sair', 2)
-            elif origem == 3 and self.heroi.x1 >= 80 and self.heroi.y1 <= 75:
+            elif origem == 3 and self.heroi.x1 >= 72 and self.heroi.y1 <= 56:
                 pyxel.text(72, 12, '[E] Sair', 7)
         
-        # tela das dicas
+        # Tela das dicas
         
-        if self.dica1:
+        if self.sala_atual == 3 and self.dica1:
         
             pyxel.rect(118,90,18,15,0)
             pyxel.text(119,91,'Dica',7)
             if pyxel.btnp(pyxel.KEY_F):
                 self.dica1 = False
+             
+        if self.livro_vermelho and self.sala_atual == 3:
+         
+            pyxel.rect(75, 91, 60, 7, 0)
+            pyxel.text(78,92,'Albúm de Fotos',7)   
+            if pyxel.btnp(pyxel.KEY_F):
+                self.livro_vermelho = False
                 
-#----------------------------------------------------------------#
+        if self.livro_verde and self.sala_atual == 3:
+         
+            pyxel.rect(75, 91, 60, 7, 0)
+            pyxel.text(78,92,'Nome da Planta',7)   
+            if pyxel.btnp(pyxel.KEY_F):
+                self.livro_verde = False
+                
+        if self.livro_amarelo and self.sala_atual == 3:
+         
+            pyxel.rect(75, 91, 60, 7, 0)
+            pyxel.text(78,92,'Livro Infantil',7)   
+            if pyxel.btnp(pyxel.KEY_F):
+                self.livro_amarelo = False
+                
+        if self.sala_atual == 3 and self.cogumelo:
+        
+            pyxel.rect(118,90,18,15,0)
+            pyxel.text(119,91,'Morte',7)
+            if pyxel.btnp(pyxel.KEY_F):
+                self.cogumelo = False
+                
+#_________________________________________________________________________#  
 
     def carregar_cenario(self,arquivo):
         pyxel.load(arquivo)
         pyxel.images[1].load(0, 0, 'personagem_56x72.png')
             
+#_________________________________________________________________________#  
+
+    def posicao_valida(self, x, y):
+        # Pés
+        pes_x1 = x + 2
+        pes_x2 = x + self.heroi.largura - 2
+        pes_y1 = y + 12
+        pes_y2 = y + self.heroi.altura
+
+        #--------------Quarto--------------#
+        if self.sala_atual == 1:
+            #mesa de cabeceira esquerda
+            if (pes_x2 >= 11 and pes_x1 <= 28) and (pes_y1 <= 66):
+                return False
+                
+            #mesa de cabeceira direita
+            if (pes_x2 >= 85 and pes_x1 <= 101) and (pes_y1 <= 66):
+                return False
+                
+            #cama
+            if (pes_x2 >= 28 and pes_x1 <= 84) and (pes_y1 <= 73):
+                return False
+                
+            #bau da cama
+            if (pes_x2 >= 41 and pes_x1 <= 70) and (pes_y1 <= 77):
+                return False
+
+        #-------------Escritório-------------#
+        if self.sala_atual == 2:
+            #mesa e cadeira
+            if (pes_x2 >= 58 and pes_x1 <= 140) and (pes_y1 <= 68):
+                return False
+                
+            #ESCADA
+                
+            if (pes_x2 >= 12 and pes_x1 <= 32) and (pes_y1 > 93):
+                self.subir = True
+                self.descer = False
+                
+            if (pes_x2 >= 12 and pes_x1 <= 32) and (pes_y1 > 82 and pes_y2 <= 84):
+                self.subir = False
+                self.descer = True
+                
+            if (pes_x1 == 32) and (pes_y1 > 93) and self.subir:
+                self.subir = False
+                self.descer = False
+                
+            if (pes_x2 >= 12 and pes_x1 <= 32) and (pes_y1 < 80) and self.subir:
+                return False
+                  
+            if (pes_x2 >= 12 and pes_x1 <= 32) and (pes_y1 >= 78 and pes_y1 <= 93) and self.subir is False and self.descer is False:
+                return False
+                
+            #Armário
+            if (pes_x2 >= 0 and pes_x1 <= 10) and (pes_y1 >= 17):
+                return False
+
+        #----------------Sala----------------#
+        if self.sala_atual == 3:
+            #sofá
+            if (pes_x2 >= 0 and pes_x1 <= 55) and (pes_y1 <= 63):
+                return False
         
+
+        return True
+        
+#_________________________________________________________________________#         
+
+class Objetos:
+
+    def __init__(self, x, y, largura, altura, nome):
+    
+        self.x1 = x
+        self.x2 = x + largura
+        self.y1 = y
+        self.y2 = y + altura
+        self.nome = nome
+        self.largura = largura
+        self.altura = altura
+        
+
+    
+    
+    
+    
+    
 Jogo()
-
-
-
-
