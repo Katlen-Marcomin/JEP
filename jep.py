@@ -102,7 +102,12 @@ class Jogo:
         self.sofa = False
         self.subir = False
         self.descer = False
-        self.cogumelo = False
+        self.quadro = False
+        self.globo = False
+        self.sofa = False
+        self.tapete = False
+        self.qdc = False
+        
         
         self.portas = [
     # P1: Quarto
@@ -111,8 +116,10 @@ class Jogo:
     {"x1": 75, "x2": 100, "destino": 2, "arquivo": "escritorio.pyxres", "heroi_x": 90, "heroi_y": 65},
     # P3: Sala
     {"x1": 79, 'x2': 112,'destino': 3, 'arquivo': 'sala.pyxres', 'heroi_x':  90,
- "heroi_y": 65}
-    #
+ "heroi_y": 65},
+    #Cofre
+    {"x1": 0, 'x2': 10,'destino': 4, 'arquivo': 'azul.pyxres', 'heroi_x':  20,
+ "heroi_y": 69}
 ]
         
         #Carregar imagem
@@ -165,10 +172,26 @@ class Jogo:
             if pyxel.mouse_x == 48 and (pyxel.mouse_y >= 12 and pyxel.mouse_y <= 22):
                 
                     self.livro_amarelo = True 
-                    
-            if self.sala_atual == 3 and pyxel.mouse_x == 35 and (pyxel.mouse_y >= 8 and pyxel.mouse_y <= 13):
+            
+            if self.sala_atual == 3 and (pyxel.mouse_x >= 8 and pyxel.mouse_x <= 23) and (pyxel.mouse_y >= 12 and pyxel.mouse_y <= 30):
                 
-                    self.cogumelo = True 
+                    self.quadro = True 
+                    
+            if self.sala_atual == 3 and (pyxel.mouse_x >= 52 and pyxel.mouse_x <= 57) and (pyxel.mouse_y >= 13 and pyxel.mouse_y <= 22):
+                
+                    self.globo = True 
+                    
+            if self.sala_atual == 3 and (pyxel.mouse_x >= 3 and pyxel.mouse_x <= 58) and (pyxel.mouse_y >= 33 and pyxel.mouse_y <= 61):
+                
+                    self.sofa = True 
+                    
+            if self.sala_atual == 3 and (pyxel.mouse_x >= 10 and pyxel.mouse_x <= 50) and (pyxel.mouse_y >= 69 and pyxel.mouse_y <= 87):
+                
+                    self.tapete = True 
+                    
+            if self.sala_atual == 0 and (pyxel.mouse_x >= 119 and pyxel.mouse_x <= 137) and (pyxel.mouse_y >= 32 and pyxel.mouse_y <= 49):
+                
+                    self.qdc = True 
                 
                 
         #Limites de Tela
@@ -209,9 +232,19 @@ class Jogo:
                             self.carregar_cenario(porta['arquivo'])
                             self.heroi.x1 = porta['heroi_x']
                             self.heroi.y1 = porta['heroi_y']
+                            
+        if self.sala_atual == 2:
+            for porta in self.portas:
+                if porta['destino'] == 4 and self.heroi.y1 <= 73:
+                    if pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
+                        self.sala_atual = porta['destino']
+                        self.carregar_cenario(porta['arquivo'])
+                        self.heroi.x1 = porta['heroi_x']
+                        self.heroi.y1 = porta['heroi_y']
+                        
                         
         #Sair do cômodo
-        elif self.sala_atual in [1, 2, 3]:
+        elif self.sala_atual in [1, 2, 3, 4]:
             origem = self.sala_atual
             pode_sair = False
 
@@ -257,7 +290,7 @@ class Jogo:
             return False
             
 #_________________________________________________________________________#              
-            
+         
     def draw(self):
         pyxel.cls(0)
         pyxel.blt(0,0,0,0,0,136,100)
@@ -317,13 +350,41 @@ class Jogo:
             if pyxel.btnp(pyxel.KEY_F):
                 self.livro_amarelo = False
                 
-        if self.sala_atual == 3 and self.cogumelo:
-        
-            pyxel.rect(118,90,18,15,0)
-            pyxel.text(119,91,'Morte',7)
+        if self.sala_atual == 3 and self.quadro:
+       
+            pyxel.rect(95,90,60,15,0)
+            pyxel.text(96,91,'22/02/2007',7)
             if pyxel.btnp(pyxel.KEY_F):
-                self.cogumelo = False
+                self.quadro = False
                 
+        if self.sala_atual == 3 and self.globo:
+        
+            pyxel.rect(95,90,60,15,0)
+            pyxel.text(96,91,'Papai Noel',7)
+            if pyxel.btnp(pyxel.KEY_F):
+                self.globo = False
+                
+        if self.sala_atual == 3 and self.sofa:
+        
+            pyxel.rect(63,90,72,15,0)
+            pyxel.text(64,91,'Poeira e Carrinhos',7)
+            if pyxel.btnp(pyxel.KEY_F):
+                self.sofa = False
+                
+        if self.sala_atual == 3 and self.tapete:
+        
+            pyxel.rect(113,90,60,15,0)
+            pyxel.text(114,91,'Areia',7)
+            if pyxel.btnp(pyxel.KEY_F):
+                self.tapete = False
+                
+        if self.sala_atual == 0 and self.qdc:
+        
+            pyxel.rect(87,90,60,15,0)
+            pyxel.text(88,91,'Relogio Fofo',7) 
+            if pyxel.btnp(pyxel.KEY_F):
+                self.qdc = False
+       
 #_________________________________________________________________________#  
 
     def carregar_cenario(self,arquivo):
@@ -398,22 +459,7 @@ class Jogo:
         
 #_________________________________________________________________________#         
 
-class Objetos:
-
-    def __init__(self, x, y, largura, altura, nome):
-    
-        self.x1 = x
-        self.x2 = x + largura
-        self.y1 = y
-        self.y2 = y + altura
-        self.nome = nome
-        self.largura = largura
-        self.altura = altura
-        
-
-    
-    
-    
-    
     
 Jogo()
+
+
