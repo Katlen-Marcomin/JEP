@@ -1,4 +1,5 @@
 import pyxel
+import random
 class Personagem:
     def __init__(self,x,y,largura,altura,cor,desenho):
         self.x1 = x
@@ -95,6 +96,10 @@ class Jogo:
         # Coisas
         self.heroi = Personagem(90,65,14,18,7,'meleca')
         self.dica1 = False
+        self.dica2 = False
+        self.dica3 = False
+        self.dica4 = False
+        self.dica5 = False
         self.sala_atual = 3
         self.livro_vermelho = False
         self.livro_verde = False
@@ -121,6 +126,19 @@ class Jogo:
     {"x1": 0, 'x2': 10,'destino': 4, 'arquivo': 'azul.pyxres', 'heroi_x':  20,
  "heroi_y": 69}
 ]
+
+        #Criar Senha
+        self.senha = []
+        c = 0
+        
+        while c != 4:
+            num = random.randint(0,9)
+            if str(num) in self.senha:
+                pass
+            else:
+                self.senha.append(str(num))
+                c += 1
+            
         
         #Carregar imagem
      
@@ -160,7 +178,23 @@ class Jogo:
             if pyxel.mouse_x == 44 and (pyxel.mouse_y >= 10 and pyxel.mouse_y <= 22):
             
                 self.dica1 = True
-                
+        
+            if (pyxel.mouse_x >= 36 and pyxel.mouse_x <= 46) and (pyxel.mouse_y >= 14 and pyxel.mouse_y <= 23):
+            
+                self.dica2 = True
+        
+            if (pyxel.mouse_x >= 117 and pyxel.mouse_x <= 126) and (pyxel.mouse_y >= 44 and pyxel.mouse_y <= 51):
+            
+                self.dica3 = True
+        
+            if pyxel.mouse_x == 73 and pyxel.mouse_y == 28:
+            
+                self.dica4 = True
+        
+            if (pyxel.mouse_x >= 52 and pyxel.mouse_x <= 62) and (pyxel.mouse_y >= 37 and pyxel.mouse_y <= 48):
+            
+                self.dica5 = True
+            
             if pyxel.mouse_x == 41 and (pyxel.mouse_y >= 9 and pyxel.mouse_y <= 22):
                 
                     self.livro_vermelho = True
@@ -233,18 +267,22 @@ class Jogo:
                             self.heroi.x1 = porta['heroi_x']
                             self.heroi.y1 = porta['heroi_y']
                             
-        if self.sala_atual == 2:
+        elif self.sala_atual == 2:
             for porta in self.portas:
-                if porta['destino'] == 4 and self.heroi.y1 <= 73:
-                    if pyxel.btn(pyxel.MOUSE_BUTTON_LEFT):
-                        self.sala_atual = porta['destino']
-                        self.carregar_cenario(porta['arquivo'])
-                        self.heroi.x1 = porta['heroi_x']
-                        self.heroi.y1 = porta['heroi_y']
-                        
+                if 16 <= self.heroi.x1 <= 47 and self.heroi.y1 <= 65 and pyxel.btnp(pyxel.KEY_E):
+                    self.sala_atual = 0
+                    self.carregar_cenario('corredor.pyxres')
+                    self.heroi.x1 = 85
+                    self.heroi.y1 = 65
+                #elif self.heroi.y1 <= 73 and porta['destino'] == 4:
+                 #   if pyxel.btnp(pyxel.KEY_E):
+                  #      self.sala_atual = porta['destino']
+                        #self.carregar_cenario(porta['arquivo'])
+                   #     self.heroi.x1 = porta['heroi_x']
+                    #    self.heroi.y1 = porta['heroi_y']
                         
         #Sair do cômodo
-        elif self.sala_atual in [1, 2, 3, 4]:
+        elif self.sala_atual in [1, 3, 4]:
             origem = self.sala_atual
             pode_sair = False
 
@@ -253,8 +291,6 @@ class Jogo:
                 pode_sair = True
 
             #Escritório
-            elif origem == 2 and 10 <= self.heroi.x1 <= 50 and self.heroi.y1 <= 75:
-                pode_sair = True
 
             #Sala
             elif origem == 3 and self.heroi.x1 >= 80 and self.heroi.y1 <= 75:
@@ -325,7 +361,7 @@ class Jogo:
         if self.sala_atual == 3 and self.dica1:
         
             pyxel.rect(118,90,18,15,0)
-            pyxel.text(119,91,'Dica',7)
+            pyxel.text(119,91,self.senha[0],7)
             if pyxel.btnp(pyxel.KEY_F):
                 self.dica1 = False
              
@@ -384,6 +420,35 @@ class Jogo:
             pyxel.text(88,91,'Relogio Fofo',7) 
             if pyxel.btnp(pyxel.KEY_F):
                 self.qdc = False
+        
+        if self.sala_atual == 1 and self.dica2:
+        
+            pyxel.rect(118,90,18,15,0)
+            pyxel.text(119,91,self.senha[1],7)
+            if pyxel.btnp(pyxel.KEY_F):
+                self.dica2 = False
+        
+        if self.sala_atual == 2 and self.dica3:
+        
+            pyxel.rect(118,90,18,15,0)
+            pyxel.text(119,91,self.senha[2],7)
+            if pyxel.btnp(pyxel.KEY_F):
+                self.dica3 = False
+        
+        if self.sala_atual == 2 and self.dica4:
+        
+            pyxel.rect(118,90,18,15,0)
+            pyxel.text(119,91,self.senha[3],7)
+            if pyxel.btnp(pyxel.KEY_F):
+                self.dica4 = False
+        
+        if self.sala_atual == 0 and self.dica5:
+        
+            pyxel.rect(110,90,26,15,0)
+            senha_errada = self.senha[3] + self.senha[2] + self.senha[0] + self.senha[1]
+            pyxel.text(119,91,senha_errada,7)
+            if pyxel.btnp(pyxel.KEY_F):
+                self.dica4 = False
        
 #_________________________________________________________________________#  
 
