@@ -127,6 +127,23 @@ class Jogo:
         self.tapete = False
         self.qdc = False
         self.Vcogumelo = False
+        self.gav1 = False
+        self.gav2 = False
+        self.gav3 = False
+        self.gav4 = False
+        self.gato = False
+        self.peixe = False
+        self.gaveta1 = False
+        self.gaveta3 = False
+        self.impressora = False
+        self.cafe = False
+        self.livro1 = False
+        self.livro2 = False
+        self.livro3 = False
+        self.livro4 = False
+        self.livro5 = False
+        self.livro6 = False
+        self.livro7 = False
         
         self.win = False
         self.n_tentativas = 1
@@ -262,9 +279,73 @@ class Jogo:
             if self.sala_atual == 3 and (pyxel.mouse_x >= 31 and pyxel.mouse_x <= 39) and (pyxel.mouse_y >= 16 and pyxel.mouse_y <= 18): 
                 
                 self.Vcogumelo = True  
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 58 and pyxel.mouse_x <= 71) and (pyxel.mouse_y >= 43 and pyxel.mouse_y <= 47): 
+                
+                self.gav1 = True  
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 58 and pyxel.mouse_x <= 71) and (pyxel.mouse_y >= 48 and pyxel.mouse_y <= 53): 
+                
+                self.gav2 = True
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 58 and pyxel.mouse_x <= 71) and (pyxel.mouse_y >= 54 and pyxel.mouse_y <= 59): 
+                
+                self.gav3 = True
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 58 and pyxel.mouse_x <= 71) and (pyxel.mouse_y >= 60 and pyxel.mouse_y <= 66): 
+                
+                self.gav4 = True
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 61 and pyxel.mouse_x <= 68) and (pyxel.mouse_y >= 33 and pyxel.mouse_y <= 37): 
+                
+                self.peixe = True
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 79 and pyxel.mouse_x <= 96) and (pyxel.mouse_y >= 16 and pyxel.mouse_y <= 25): 
+                
+                self.gato = True
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 61 and pyxel.mouse_x <= 63) and (pyxel.mouse_y >= 16 and pyxel.mouse_y <= 24): 
+                
+                self.livro1 = True
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 66 and pyxel.mouse_x <= 64) and (pyxel.mouse_y >= 17 and pyxel.mouse_y <= 24): 
+                
+                self.livro2 = True
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 66 and pyxel.mouse_x <= 68) and (pyxel.mouse_y >= 17 and pyxel.mouse_y <= 24): 
+                
+                self.livro3 = True
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 69 and pyxel.mouse_x <= 70) and (pyxel.mouse_y >= 17 and pyxel.mouse_y <= 24): 
+                
+                self.livro4 = True
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 74 and pyxel.mouse_x <= 75) and (pyxel.mouse_y >= 17 and pyxel.mouse_y <= 24): 
+                
+                self.livro5 = True
+            
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 76 and pyxel.mouse_x <= 77) and (pyxel.mouse_y >= 19 and pyxel.mouse_y <= 24): 
+                
+                self.livro6 = True
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 106 and pyxel.mouse_x <= 115) and (pyxel.mouse_y >= 44 and pyxel.mouse_y <= 51): 
+                
+                self.gaveta1 = True
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 128 and pyxel.mouse_x <= 137) and (pyxel.mouse_y >= 44 and pyxel.mouse_y <= 51): 
+                
+                self.gaveta3 = True
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 109 and pyxel.mouse_x <= 120) and (pyxel.mouse_y >= 26 and pyxel.mouse_y <= 39): 
+                
+                self.cafe = True
+                
+            if self.sala_atual == 2 and (pyxel.mouse_x >= 124 and pyxel.mouse_x <= 133) and (pyxel.mouse_y >= 31 and pyxel.mouse_y <= 40): 
+                
+                self.impressora = True
             
             #Corredor
-            if self.sala_atual == 0 and (pyxel.mouse_x >= 119 and pyxel.mouse_x <= 137) and (pyxel.mouse_y >= 32 and pyxel.mouse_y <= 49):
+            if self.sala_atual == 0 and (pyxel.mouse_x >= 119 and pyxel.mouse_x <= 137) and (pyxel.mouse_y >= 18 and pyxel.mouse_y <= 25):
                 
                     self.qdc = True 
  
@@ -548,7 +629,118 @@ class Jogo:
                 pyxel.text(69,91,'Cogumelo Venenoso',7) 
                 if pyxel.btnp(pyxel.KEY_F):
                     self.Vcogumelo = False
+                    
+            if self.sala_atual == 2 and self.peixe:
+            
+                pyxel.rect(113,90,60,15,0)
+                pyxel.text(114,91,'....?',7)
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.peixe = False
+                    
+            if self.sala_atual == 2 and self.gato:
+            
+                pyxel.rect(113,90,60,15,0)
+                pyxel.text(114,91,'Miau?',7)
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.gato = False
+                    
+            if self.sala_atual == 2 and self.gav1:
+            
+                pyxel.rect(113,90,60,15,0)
+                pyxel.text(114,91,'Coisas',7)
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.gav1 = False
+                    
+            if self.sala_atual == 2 and self.gav2:
+            
+                pyxel.rect(113,90,60,15,0)
+                pyxel.text(114,91,'Coisas',7)
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.gav2 = False
+                    
+            if self.sala_atual == 2 and self.gav3:
+            
+                pyxel.rect(113,90,60,15,0)
+                pyxel.text(114,91,'Coisas',7)
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.gav3 = False
            
+            if self.sala_atual == 2 and self.gav4:
+            
+                pyxel.rect(113,90,60,15,0)
+                pyxel.text(114,91,'1243',7)
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.gav4 = False
+                    
+            if self.sala_atual == 2 and self.gaveta1:
+            
+                pyxel.rect(113,90,60,15,0)
+                pyxel.text(114,91,'Papel',7)
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.gaveta1 = False
+                    
+            if self.sala_atual == 2 and self.gaveta3:
+            
+                pyxel.rect(113,90,60,15,0)
+                pyxel.text(114,91,'tinta',7)
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.gaveta3 = False
+                    
+            if self.livro1 and self.sala_atual == 2:
+             
+                pyxel.rect(75, 91, 60, 7, 0)
+                pyxel.text(78,92,'Livro Chato',7)   
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.livro1 = False
+                    
+            if self.livro2 and self.sala_atual == 2:
+             
+                pyxel.rect(75, 91, 60, 7, 0)
+                pyxel.text(78,92,'Livro Chato',7)   
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.livro2 = False
+                    
+            if self.livro3 and self.sala_atual == 2:
+             
+                pyxel.rect(75, 91, 60, 7, 0)
+                pyxel.text(78,92,'Livro Chato',7)   
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.livro3 = False
+                    
+            if self.livro4 and self.sala_atual == 2:
+             
+                pyxel.rect(75, 91, 60, 7, 0)
+                pyxel.text(78,92,'Livro Chato',7)   
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.livro4 = False
+                    
+            if self.livro5 and self.sala_atual == 2:
+             
+                pyxel.rect(75, 91, 60, 7, 0)
+                pyxel.text(78,92,'Livro Chato',7)   
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.livro5 = False
+                    
+            if self.livro6 and self.sala_atual == 2:
+             
+                pyxel.rect(75, 91, 60, 7, 0)
+                pyxel.text(78,92,'Livro Chato',7)   
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.livro6 = False
+           
+            if self.cafe and self.sala_atual == 2:
+             
+                pyxel.rect(113,90,60,15,0)
+                pyxel.text(114,91,'Cafe',7)
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.cafe = False
+                    
+            if self.impressora and self.sala_atual == 2:
+             
+                pyxel.rect(75, 91, 60, 7, 0)
+                pyxel.text(78,92,'Impressora',7)   
+                if pyxel.btnp(pyxel.KEY_F):
+                    self.impressora = False
            
             #Cofre
             
